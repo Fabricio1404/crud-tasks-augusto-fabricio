@@ -1,4 +1,4 @@
-import { User } from '../models/user.js';
+import { User } from '../models/user.model.js';
 import { Op } from 'sequelize';
 
 const MAX = 100;

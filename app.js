@@ -2,8 +2,8 @@ import express from 'express';
 import { sequelize } from './src/config/database.js';
 import dotenv from 'dotenv';
 
-import './src/models/user.js';
-import './src/models/task.js';
+import './src/models/user.model.js';
+import './src/models/task.model.js';
 
 import userRoutes from './src/routes/user.routes.js';
 import taskRoutes from './src/routes/task.routes.js';

@@ -4,11 +4,7 @@ import { sequelize } from '../config/database.js';
 export const Task = sequelize.define(
   'Task',
   {
-    id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true
-    },
+    id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
     title: {
       type: DataTypes.STRING(100),
       allowNull: false,
@@ -26,14 +22,8 @@ export const Task = sequelize.define(
         len: { args: [1, 100], msg: 'La descripción debe tener hasta 100 caracteres' }
       }
     },
-    isComplete: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false
-    }
+    isComplete: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
+    user_id: { type: DataTypes.INTEGER, allowNull: false } // FK a users.id
   },
-  {
-    tableName: 'tasks',
-    timestamps: false
-  }
+  { tableName: 'tasks', timestamps: false }
 );

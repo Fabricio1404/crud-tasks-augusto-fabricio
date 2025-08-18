@@ -4,6 +4,8 @@ import dotenv from 'dotenv';
 
 import './src/models/user.model.js';
 import './src/models/task.model.js';
+import './src/models/associations.js';
+
 
 import userRoutes from './src/routes/user.routes.js';
 import taskRoutes from './src/routes/task.routes.js';

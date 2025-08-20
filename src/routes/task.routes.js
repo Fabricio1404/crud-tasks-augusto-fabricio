@@ -16,7 +16,7 @@ router.get('/api/tasks/:id', getTaskById);
 router.put('/api/tasks/:id', updateTask);
 router.delete('/api/tasks/:id', deleteTask);
 
-// nuevo: listar tareas de un usuario
+
 router.get('/api/users/:id/tasks', getTasksByUser);
 
 export default router;

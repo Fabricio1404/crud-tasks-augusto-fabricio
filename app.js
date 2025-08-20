@@ -2,15 +2,20 @@ import express from 'express';
 import { sequelize } from './src/config/database.js';
 import dotenv from 'dotenv';
 
+import express from 'express';
+import { sequelize } from './src/config/database.js';
+import dotenv from 'dotenv';
+
 import './src/models/user.model.js';
 import './src/models/task.model.js';
-import './src/models/role.model.js';
-import './src/models/userRole.model.js';
+import './src/models/course.model.js';
+import './src/models/userCourse.model.js';
 import './src/models/associations.js';
-
 
 import userRoutes from './src/routes/user.routes.js';
 import taskRoutes from './src/routes/task.routes.js';
+import courseRoutes from './src/routes/course.routes.js';
+import userCourseRoutes from './src/routes/userCourse.routes.js';  
 
 dotenv.config();
 
@@ -19,8 +24,12 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
+// Rutas
 app.use(userRoutes);
 app.use(taskRoutes);
+app.use(courseRoutes);
+app.use(userCourseRoutes);   
+
 
 app.get('/', (req, res) => {
   res.send('Servidor funcionando');

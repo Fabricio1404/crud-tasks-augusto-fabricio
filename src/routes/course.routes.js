@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import { createRole, getRoles } from '../controllers/course.controller.js';
+import { createCourse, getCourses } from '../controllers/course.controller.js';
 
 const router = Router();
 
-router.post('/api/roles', createRole);
-router.get('/api/roles', getRoles);
+router.post('/courses', createCourse);
+router.get('/courses', getCourses);
 
 export default router;

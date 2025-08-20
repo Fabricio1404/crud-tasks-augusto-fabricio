@@ -3,23 +3,27 @@ import { Task } from './task.model.js';
 import { Course } from './course.model.js';
 import { UserCourse } from './userCourse.model.js';
 
-// 1 a N
+// 1:N - User -> Task
 User.hasMany(Task, { foreignKey: 'user_id', as: 'tasks' });
 Task.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
 
-// N a N
+// N:N - User <-> Course (tabla intermedia user_courses)
 User.belongsToMany(Course, {
   through: UserCourse,
   as: 'courses',
-  foreignKey: 'user_id'
+  foreignKey: 'user_id',
+  otherKey: 'course_id',
 });
 
 Course.belongsToMany(User, {
   through: UserCourse,
   as: 'users',
-  foreignKey: 'course_id'
+  foreignKey: 'course_id',
+  otherKey: 'user_id',
 });
 
-
+// Para poder hacer include directo desde la intermedia
 UserCourse.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
 UserCourse.belongsTo(Course, { foreignKey: 'course_id', as: 'course' });
+
+export { User, Task, Course, UserCourse };

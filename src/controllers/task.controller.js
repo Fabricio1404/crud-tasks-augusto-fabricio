@@ -1,5 +1,5 @@
 import { Task } from '../models/task.model.js';
-import { User } from '../models/course.model.js';
+import { User } from '../models/user.model.js';
 import { Op } from 'sequelize';
 
 const MAX = 100;

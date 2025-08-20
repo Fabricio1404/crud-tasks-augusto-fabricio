@@ -2,10 +2,6 @@ import express from 'express';
 import { sequelize } from './src/config/database.js';
 import dotenv from 'dotenv';
 
-import express from 'express';
-import { sequelize } from './src/config/database.js';
-import dotenv from 'dotenv';
-
 import './src/models/user.model.js';
 import './src/models/task.model.js';
 import './src/models/course.model.js';

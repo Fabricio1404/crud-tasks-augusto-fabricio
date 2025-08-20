@@ -4,6 +4,8 @@ import dotenv from 'dotenv';
 
 import './src/models/user.model.js';
 import './src/models/task.model.js';
+import './src/models/role.model.js';
+import './src/models/userRole.model.js';
 import './src/models/associations.js';
 
 

@@ -192,7 +192,7 @@ export const deleteTask = async (req, res) => {
   }
 };
 
-// NUEVO: tareas por usuario
+//tareas por usuario
 export const getTasksByUser = async (req, res) => {
   try {
     const uid = Number(req.params.id);

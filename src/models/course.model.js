@@ -2,6 +2,7 @@ import { DataTypes } from 'sequelize';
 import { sequelize } from '../config/database.js';
 
 export const Course = sequelize.define('Course', {
+<<<<<<< HEAD
   id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
   name: {
     type: DataTypes.STRING(100),
@@ -22,4 +23,23 @@ export const Course = sequelize.define('Course', {
 }, {
   tableName: 'courses',
   timestamps: false
+=======
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  },
+  title: {
+    type: DataTypes.STRING(100),
+    allowNull: false,
+    unique: true
+  },
+  description: {
+    type: DataTypes.STRING(255),
+    allowNull: true
+  }
+}, {
+  tableName: 'courses',
+  timestamps: true
+>>>>>>> develop
 });

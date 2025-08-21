@@ -1,4 +1,4 @@
-import { DataTypes } from 'sequelize';
+    import { DataTypes } from 'sequelize';
 import { sequelize } from '../config/database.js';
 
 export const User = sequelize.define(
@@ -23,6 +23,7 @@ export const User = sequelize.define(
       unique: { name: 'unique_email', msg: 'El email ya existe' },
       validate: {
         notEmpty: { msg: 'El email es requerido' },
+        isEmail: { msg: 'Formato de email inválido' },
         len: { args: [1, 100], msg: 'El email debe tener hasta 100 caracteres' },
       },
     },

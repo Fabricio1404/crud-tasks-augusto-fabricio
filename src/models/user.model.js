@@ -1,20 +1,18 @@
 import { DataTypes } from "sequelize";
-import { sequelize } from "../config/db.js";
-import { Task } from "./task.model.js";
+import { sequelize } from "../config/database.js";
 
-export const User = sequelize.define("User", {
-  name: { type: DataTypes.STRING(60), allowNull: false },
-  email: { type: DataTypes.STRING(120), allowNull: false, unique: true },
-  password: { type: DataTypes.STRING(120), allowNull: false },
-}, {
-  tableName: "users",
-  timestamps: true,
-});
+export const User = sequelize.define(
+  "User",
+  {
+    id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
+    name: { type: DataTypes.STRING(100), allowNull: false },
+    email: { type: DataTypes.STRING(100), allowNull: false, unique: true },
+    password: { type: DataTypes.STRING(100), allowNull: false },
+  },
+  {
+    tableName: "users",
+    timestamps: false,
+  }
+);
 
-// Asociación (1:N)
-User.hasMany(Task, {
-  foreignKey: "userId",
-  as: "tasks",
-  onDelete: "CASCADE",
-  hooks: true,
-});
+

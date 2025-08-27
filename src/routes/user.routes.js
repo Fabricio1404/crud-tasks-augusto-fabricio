@@ -1,17 +1,28 @@
-import { Router } from 'express';
+import { Router } from "express";
 import {
-  createUser, getUsers, getUserById, updateUser, deleteUser,
-} from '../controllers/user.controller.js';
+  createUser,
+  getUsers,
+  getUserById,
+  updateUser,
+  deleteUser,
+} from "../controllers/user.controller.js";
 import {
-  validateCreateUser, validateUpdateUser, validateUserIdParam
-} from '../middlewares/validatorsUser.js';
+  validateCreateUser,
+  validateUpdateUser,
+  validateUserIdParam,
+} from "../middlewares/validatorsUser.js";
+import { getTasksByUser } from "../controllers/task.controller.js";
 
 const router = Router();
 
-router.post('/api/users', validateCreateUser, createUser);
-router.get('/api/users', getUsers);
-router.get('/api/users/:id', validateUserIdParam, getUserById);
-router.put('/api/users/:id', validateUserIdParam, validateUpdateUser, updateUser);
-router.delete('/api/users/:id', validateUserIdParam, deleteUser);
+// Rutas CORTAS (prefijo /api/users se pone en app.js)
+router.post("/", validateCreateUser, createUser);
+router.get("/", getUsers);
+router.get("/:id", validateUserIdParam, getUserById);
+router.put("/:id", validateUserIdParam, validateUpdateUser, updateUser);
+router.delete("/:id", validateUserIdParam, deleteUser);
+
+// Ruta anidada limpia: /api/users/:id/tasks
+router.get("/:id/tasks", validateUserIdParam, getTasksByUser);
 
 export default router;

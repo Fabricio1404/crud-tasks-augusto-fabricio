@@ -23,7 +23,12 @@ import { UserCourse } from './userCourse.model.js';
 User.hasMany(Task, { foreignKey: 'user_id', as: 'tasks' });
 Task.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
 
-// N:N - User <-> Course (tabla intermedia user_courses)
+
+// 1:N - Course -> Task
+Course.hasMany(Task, { foreignKey: 'course_id', as: 'tasks' });
+Task.belongsTo(Course, { foreignKey: 'course_id', as: 'course' });
+
+// N:M - User <-> Course (tabla intermedia user_courses)
 User.belongsToMany(Course, {
   through: UserCourse,
   as: 'courses',

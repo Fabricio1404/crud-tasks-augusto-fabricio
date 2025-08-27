@@ -1,27 +1,19 @@
 import { Router } from 'express';
-<<<<<<< HEAD
 import {
   createCourse,
   getCourses,
   getCourseById,
   updateCourse,
-  deleteCourse
+  deleteCourse,
 } from '../controllers/course.controller.js';
 
 const router = Router();
 
-router.post('/api/courses',     createCourse);
-router.get('/api/courses',      getCourses);
-router.get('/api/courses/:id',  getCourseById);
-router.put('/api/courses/:id',  updateCourse);
-router.delete('/api/courses/:id', deleteCourse);
-=======
-import { createCourse, getCourses } from '../controllers/course.controller.js';
 
-const router = Router();
-
-router.post('/courses', createCourse);
-router.get('/courses', getCourses);
->>>>>>> develop
+router.post('/', createCourse);
+router.get('/', getCourses);
+router.get('/:id', getCourseById);
+router.put('/:id', updateCourse);
+router.delete('/:id', deleteCourse);
 
 export default router;

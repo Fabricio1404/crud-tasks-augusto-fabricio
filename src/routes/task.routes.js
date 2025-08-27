@@ -1,21 +1,17 @@
-import { Router } from 'express';
+import { Router } from "express";
 import {
-  createTask,
-  getTasks,
-  getTaskById,
-  updateTask,
-  deleteTask,
-  getTasksByUser,
-} from '../controllers/task.controller.js';
+  getTasks, getTaskById, createTask, updateTask, deleteTask,
+} from "../controllers/task.controller.js";
+import {
+  validateCreateTask, validateUpdateTask, validateTaskIdParam,
+} from "../middlewares/validatorsTask.js";
 
 const router = Router();
 
-
-router.post('/', createTask);
-router.get('/', getTasks);
-router.get('/:id', getTaskById);
-router.put('/:id', updateTask);
-router.delete('/:id', deleteTask);
-router.get('/users/:id/tasks', getTasksByUser);
+router.get("/", getTasks);
+router.get("/:id", validateTaskIdParam, getTaskById);
+router.post("/", validateCreateTask, createTask);
+router.put("/:id", validateTaskIdParam, validateUpdateTask, updateTask);
+router.delete("/:id", validateTaskIdParam, deleteTask);
 
 export default router;

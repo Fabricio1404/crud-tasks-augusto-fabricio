@@ -16,20 +16,18 @@ export const createUser = async (req, res) => {
     }
 
     const exists = await User.findOne({ where: { email } });
-    if (exists) return res.status(400).json({ message: 'El email ya existe' });
+    if (exists) return res.status(400).json({ message: 'email ya registrado' });
 
-    const user = await User.create({ name, email, password });
-    return res.status(201).json({ message: 'Usuario creado', data: user });
+    const created = await User.create({ name, email, password });
+    return res.status(201).json(created);
   } catch (err) {
     return res.status(500).json({ message: 'Error en servidor', error: err.message });
   }
 };
 
-export const getUsers = async (_req, res) => {
+export const getUsers = async (req, res) => {
   try {
-    const users = await User.findAll({
-      include: [{ model: Task, as: 'tasks', attributes: ['id', 'title', 'description', 'isComplete'] }],
-    });
+    const users = await User.findAll({ order: [['id', 'ASC']] });
     return res.status(200).json(users);
   } catch (err) {
     return res.status(500).json({ message: 'Error en servidor', error: err.message });
@@ -38,11 +36,9 @@ export const getUsers = async (_req, res) => {
 
 export const getUserById = async (req, res) => {
   try {
-    const user = await User.findByPk(req.params.id, {
-      include: [{ model: Task, as: 'tasks', attributes: ['id', 'title', 'description', 'isComplete'] }],
-    });
-    if (!user) return res.status(404).json({ message: 'Usuario no encontrado' });
-    return res.status(200).json(user);
+    const row = await User.findByPk(req.params.id, { include: [{ model: Task, as: 'tasks' }] });
+    if (!row) return res.status(404).json({ message: 'Usuario no encontrado' });
+    return res.status(200).json(row);
   } catch (err) {
     return res.status(500).json({ message: 'Error en servidor', error: err.message });
   }
@@ -50,21 +46,21 @@ export const getUserById = async (req, res) => {
 
 export const updateUser = async (req, res) => {
   try {
-    const current = await User.findByPk(req.params.id);
-    if (!current) return res.status(404).json({ message: 'Usuario no encontrado' });
+    const row = await User.findByPk(req.params.id);
+    if (!row) return res.status(404).json({ message: 'Usuario no encontrado' });
 
     const { name, email, password } = req.body;
-    if (name && name.length > MAX) return res.status(400).json({ message: 'name excede 100 caracteres' });
-    if (email && email.length > MAX) return res.status(400).json({ message: 'email excede 100 caracteres' });
-    if (password && password.length > MAX) return res.status(400).json({ message: 'password excede 100 caracteres' });
+    if (name && name.length > MAX) return res.status(400).json({ message: 'name máx 100' });
+    if (email && email.length > MAX) return res.status(400).json({ message: 'email máx 100' });
+    if (password && password.length > MAX) return res.status(400).json({ message: 'password máx 100' });
 
-    if (email && email !== current.email) {
-      const taken = await User.findOne({ where: { email, id: { [Op.ne]: current.id } } });
-      if (taken) return res.status(400).json({ message: 'El email ya existe' });
+    if (email) {
+      const other = await User.findOne({ where: { email, id: { [Op.ne]: row.id } } });
+      if (other) return res.status(400).json({ message: 'email ya registrado por otro usuario' });
     }
 
-    await current.update({ name, email, password });
-    return res.status(200).json({ message: 'Usuario actualizado', data: current });
+    await row.update({ name, email, password });
+    return res.status(200).json(row);
   } catch (err) {
     return res.status(500).json({ message: 'Error en servidor', error: err.message });
   }

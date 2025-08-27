@@ -23,6 +23,7 @@ export const Task = sequelize.define(
       }
     },
     isComplete: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
+    is_deleted: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false }, // <--- nuevo
     user_id:    { type: DataTypes.INTEGER, allowNull: false }, // FK -> users.id
     course_id:  { type: DataTypes.INTEGER, allowNull: true }   // (opcional) FK -> courses.id
   },
